@@ -1,17 +1,29 @@
-class Person:
+from abc import ABC, abstractmethod
+
+class Person(ABC):
     def __init__(self, name, age):
         self.name = name
         self.age = age
+
+    @abstractmethod
+    def display_details(self):
+        pass
 
 class User(Person):
     def __init__(self, name, age, user_id):
         super().__init__(name, age)
         self.user_id = user_id
 
+    def display_details(self):
+        print(f"User Name: {self.name}, Age: {self.age}, UserID: {self.user_id}")
+
 class Librarian(Person):
     def __init__(self, name, age, employee_id):
         super().__init__(name, age)
         self.employee_id = employee_id
+
+    def display_details(self):
+        print(f"Librarian Name: {self.name}, Age: {self.age}, Employee ID: {self.employee_id}")
 
 class Book:
     def __init__(self, title, author):
@@ -20,6 +32,7 @@ class Book:
         
     def __str__(self):
         return f"'{self.title}' by {self.author}"
+
 class Library:
     def __init__(self):
         self.books = []
@@ -31,11 +44,12 @@ class Library:
         for book in self.books:
             print(book)
 
+# Örnek Kullanım
 user = User("Alice", 20, 4201)
-print(user.name, user.age, user.user_id)
+user.display_details()
 
 librarian = Librarian("Bob", 40, 10749386)
-print(librarian.name, librarian.age, librarian.employee_id)
+librarian.display_details()
 
 book1 = Book("1984", "George Orwell")
 book2 = Book("Pride and Prejudice", "Jane Austen")
